@@ -8,12 +8,16 @@
 import UIKit
 
 class TasksTableViewController: UITableViewController {
+    
+    let qwe = ["qweqwe", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv", "zxcvzxcv"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Заметки"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.tableView.register(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "cell")
         
     }
 
@@ -24,14 +28,18 @@ class TasksTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        self.qwe.count
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        content.text = self.qwe[indexPath.row] .uppercased()
+        content.secondaryText = "Создано 2.03.2022"
+        cell.contentConfiguration = content
+        
         return cell
     }
 

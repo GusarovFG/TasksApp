@@ -16,6 +16,7 @@
 		FB8DC509280ECB7B00E0FE78 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */; };
 		FB8DC50B280ED13D00E0FE78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */; };
 		FB8DC50D280ED3C300E0FE78 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50C280ED3C300E0FE78 /* DateManager.swift */; };
+		FB8DC50F280ED97F00E0FE78 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FB8DC50C280ED3C300E0FE78 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +62,6 @@
 				7C65BD4331C24348899F16FA /* Pods-TasksApp.debug.xcconfig */,
 				9B022FAC554A42AAE2E4828E /* Pods-TasksApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -91,6 +92,7 @@
 				FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */,
 				FB8DC50C280ED3C300E0FE78 /* DateManager.swift */,
 				FB8DC4FD280EC8C700E0FE78 /* Assets.xcassets */,
+				FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */,
 				FB8DC4FF280EC8C700E0FE78 /* LaunchScreen.storyboard */,
 				FB8DC502280EC8C700E0FE78 /* Info.plist */,
 				FB8DC4FA280EC8C300E0FE78 /* TasksApp.xcdatamodeld */,
@@ -160,6 +162,7 @@
 			files = (
 				FB8DC501280EC8C700E0FE78 /* LaunchScreen.storyboard in Resources */,
 				FB8DC4FE280EC8C700E0FE78 /* Assets.xcassets in Resources */,
+				FB8DC50F280ED97F00E0FE78 /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

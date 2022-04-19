@@ -11,6 +11,10 @@ import UIKit
 
 class CoreDataManager {
     
+    static let shared = CoreDataManager()
+    
+    private init(){}
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -83,6 +87,7 @@ class CoreDataManager {
         var tasks = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
         
         tasks[index] = task
+        tasks[index].editDate = DateManager.shared.getDate()
         
         saveContext()
     }
