@@ -13,6 +13,8 @@
 		FB8DC4FE280EC8C700E0FE78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB8DC4FD280EC8C700E0FE78 /* Assets.xcassets */; };
 		FB8DC501280EC8C700E0FE78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8DC4FF280EC8C700E0FE78 /* LaunchScreen.storyboard */; };
 		FB8DC509280ECB7B00E0FE78 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */; };
+		FB8DC50B280ED13D00E0FE78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */; };
+		FB8DC50D280ED3C300E0FE78 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50C280ED3C300E0FE78 /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		FB8DC500280EC8C700E0FE78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB8DC502280EC8C700E0FE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FB8DC50C280ED3C300E0FE78 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				FB8DC4F1280EC8C300E0FE78 /* AppDelegate.swift */,
 				FB8DC4F3280EC8C300E0FE78 /* SceneDelegate.swift */,
 				FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */,
+				FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */,
+				FB8DC50C280ED3C300E0FE78 /* DateManager.swift */,
 				FB8DC4FD280EC8C700E0FE78 /* Assets.xcassets */,
 				FB8DC4FF280EC8C700E0FE78 /* LaunchScreen.storyboard */,
 				FB8DC502280EC8C700E0FE78 /* Info.plist */,
@@ -138,8 +144,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8DC4FC280EC8C300E0FE78 /* TasksApp.xcdatamodeld in Sources */,
+				FB8DC50D280ED3C300E0FE78 /* DateManager.swift in Sources */,
 				FB8DC4F2280EC8C300E0FE78 /* AppDelegate.swift in Sources */,
 				FB8DC509280ECB7B00E0FE78 /* TasksTableViewController.swift in Sources */,
+				FB8DC50B280ED13D00E0FE78 /* CoreDataManager.swift in Sources */,
 				FB8DC4F4280EC8C300E0FE78 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
