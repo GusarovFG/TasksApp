@@ -18,11 +18,12 @@ class DateManager {
     
     func getDate() -> String {
         
-        let formatterDate = self.formatter.string(from: self.date as Date)
-        
-        self.formatter.dateFormat = "dd.MM.YYYY"
-        self.formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
-        return "\(formatterDate)"
+        let date = Date()
+
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "dd.MM.YYYY"
+
+        return formatter.string(from: date)
     }
 }

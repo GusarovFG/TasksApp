@@ -54,19 +54,44 @@ class CoreDataManager {
     
     //MARK: - Core Data saving data
     
-    func saveTask(title: String, text: String, image: UIImage) {
+    func saveTask(title: String?, text: String?, images: Data?, creationDate: String?) {
         
         let task = Task(context: self.persistentContainer.viewContext)
-        let imageData = UIImage.pngData(image)
-        
-        task.title = title
+
+        task.images = images
+        task.creationDate = creationDate
         task.text = text
-        task.images = imageData()
-        task.creationDate = DateManager.shared.getDate()
+        task.title = title
         
         saveContext()
     }
     
+    func coreDataObjectFromImages(images: [UIImage]) -> Data? {
+        let dataArray = NSMutableArray()
+        
+        for img in images {
+            if let data = img.pngData() {
+                dataArray.add(data)
+            }
+        }
+        
+        return try? NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: true)
+    }
+
+    func imagesFromCoreData(taskImages: Data?) -> [UIImage]? {
+        var retVal = [UIImage]()
+
+        guard let object = taskImages else { return nil }
+        if let dataArray = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: object) {
+            for data in dataArray {
+                if let data = data as? Data, let image = UIImage(data: data) {
+                    retVal.append(image)
+                }
+            }
+        }
+        
+        return retVal
+    }
     //MARK: - Core Data delete data
 
     func deleteTask(index: Int) {

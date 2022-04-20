@@ -17,6 +17,11 @@
 		FB8DC50B280ED13D00E0FE78 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */; };
 		FB8DC50D280ED3C300E0FE78 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC50C280ED3C300E0FE78 /* DateManager.swift */; };
 		FB8DC50F280ED97F00E0FE78 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */; };
+		FB8DC513280EDFE800E0FE78 /* CastomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB8DC512280EDFE800E0FE78 /* CastomCollectionViewCell.xib */; };
+		FB8DC517280EED9900E0FE78 /* CastomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC516280EED9900E0FE78 /* CastomCollectionViewCell.swift */; };
+		FB8DC519280EF13B00E0FE78 /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8DC518280EF13B00E0FE78 /* CustomCollectionView.swift */; };
+		FBA23BF62810174700F1B6E3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23BF42810174700F1B6E3 /* DetailViewController.swift */; };
+		FBA23BF72810174700F1B6E3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBA23BF52810174700F1B6E3 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FB8DC50C280ED3C300E0FE78 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		FB8DC512280EDFE800E0FE78 /* CastomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastomCollectionViewCell.xib; sourceTree = "<group>"; };
+		FB8DC516280EED9900E0FE78 /* CastomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomCollectionViewCell.swift; sourceTree = "<group>"; };
+		FB8DC518280EF13B00E0FE78 /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
+		FBA23BF42810174700F1B6E3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FBA23BF52810174700F1B6E3 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,14 +100,27 @@
 				FB8DC4F3280EC8C300E0FE78 /* SceneDelegate.swift */,
 				FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */,
 				FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */,
+				FBA23BF42810174700F1B6E3 /* DetailViewController.swift */,
+				FBA23BF52810174700F1B6E3 /* DetailViewController.xib */,
 				FB8DC50C280ED3C300E0FE78 /* DateManager.swift */,
 				FB8DC4FD280EC8C700E0FE78 /* Assets.xcassets */,
 				FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */,
+				FB8DC515280EED7300E0FE78 /* CastomCollectionViewCell */,
 				FB8DC4FF280EC8C700E0FE78 /* LaunchScreen.storyboard */,
 				FB8DC502280EC8C700E0FE78 /* Info.plist */,
 				FB8DC4FA280EC8C300E0FE78 /* TasksApp.xcdatamodeld */,
 			);
 			path = TasksApp;
+			sourceTree = "<group>";
+		};
+		FB8DC515280EED7300E0FE78 /* CastomCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB8DC512280EDFE800E0FE78 /* CastomCollectionViewCell.xib */,
+				FB8DC516280EED9900E0FE78 /* CastomCollectionViewCell.swift */,
+				FB8DC518280EF13B00E0FE78 /* CustomCollectionView.swift */,
+			);
+			path = CastomCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8DC501280EC8C700E0FE78 /* LaunchScreen.storyboard in Resources */,
+				FB8DC513280EDFE800E0FE78 /* CastomCollectionViewCell.xib in Resources */,
+				FBA23BF72810174700F1B6E3 /* DetailViewController.xib in Resources */,
 				FB8DC4FE280EC8C700E0FE78 /* Assets.xcassets in Resources */,
 				FB8DC50F280ED97F00E0FE78 /* CustomCell.xib in Resources */,
 			);
@@ -215,12 +240,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBA23BF62810174700F1B6E3 /* DetailViewController.swift in Sources */,
+				FB8DC519280EF13B00E0FE78 /* CustomCollectionView.swift in Sources */,
 				FB8DC4FC280EC8C300E0FE78 /* TasksApp.xcdatamodeld in Sources */,
 				FB8DC50D280ED3C300E0FE78 /* DateManager.swift in Sources */,
 				FB8DC4F2280EC8C300E0FE78 /* AppDelegate.swift in Sources */,
 				FB8DC509280ECB7B00E0FE78 /* TasksTableViewController.swift in Sources */,
 				FB8DC50B280ED13D00E0FE78 /* CoreDataManager.swift in Sources */,
 				FB8DC4F4280EC8C300E0FE78 /* SceneDelegate.swift in Sources */,
+				FB8DC517280EED9900E0FE78 /* CastomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
