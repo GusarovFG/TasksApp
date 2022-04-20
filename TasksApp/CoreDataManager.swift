@@ -106,13 +106,16 @@ class CoreDataManager {
     
     //MARK: - Core Data edit data
     
-    func editTask(index: Int, task: Task) {
+    func editTask(index: Int, title: String?, text: String?, images: Data?, editDate: String?) {
         
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        var tasks = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
+        let tasks = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
         
-        tasks[index] = task
-        tasks[index].editDate = DateManager.shared.getDate()
+
+        tasks[index].images = images
+        tasks[index].editDate = editDate
+        tasks[index].text = text
+        tasks[index].title = title
         
         saveContext()
     }

@@ -60,9 +60,10 @@ class TasksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let deatilVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
-        
-        self.navigationController?.show(deatilVC, sender: self)
+        let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        detailVC.task = self.tasks[indexPath.row]
+        detailVC.indexOfTask = indexPath.row
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 
 

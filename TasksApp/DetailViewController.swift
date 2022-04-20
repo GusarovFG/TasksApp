@@ -15,8 +15,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var creatingDateLabel: UILabel!
     @IBOutlet weak var editDateLabel: UILabel!
     
-    var task: Task = Task()
+    var task: Task?
     var imagesFromTask: [UIImage] = []
+    var indexOfTask = 0
     
     
     override func viewDidLoad() {
@@ -27,7 +28,13 @@ class DetailViewController: UIViewController {
         let barButtonItem = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(saveTask))
         self.navigationItem.rightBarButtonItem = barButtonItem
         
-        
+        if task != nil {
+            self.titleTextField.text = self.task?.title
+            self.textView.text = self.task?.text
+            self.imagesFromTask = CoreDataManager.shared.imagesFromCoreData(taskImages: task?.images) ?? []
+            self.creatingDateLabel.text = self.task?.creationDate
+            self.editDateLabel.text = self.task?.editDate
+        }
     }
 
 
@@ -37,9 +44,21 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveTask() {
-        
-        CoreDataManager.shared.saveTask(title: self.titleTextField.text, text: self.textView.text, images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask), creationDate: DateManager.shared.getDate())
-        self.dismiss(animated: true, completion: nil)
+        if self.task == nil {
+            CoreDataManager.shared.saveTask(title: self.titleTextField.text,
+                                            text: self.textView.text,
+                                            images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
+                                            creationDate: DateManager.shared.getDate())
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            CoreDataManager.shared.editTask(index: self.indexOfTask,
+                                            title: self.titleTextField.text,
+                                            text: self.textView.text,
+                                            images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
+                                            editDate: DateManager.shared.getDate())
+            
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
     /*
