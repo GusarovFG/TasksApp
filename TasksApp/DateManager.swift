@@ -19,11 +19,11 @@ class DateManager {
     func getDate() -> String {
         
         let date = Date()
-
+        
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "dd.MM.YYYY"
-
+        
         return formatter.string(from: date)
     }
 }

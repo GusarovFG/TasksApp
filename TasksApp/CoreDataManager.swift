@@ -16,9 +16,9 @@ class CoreDataManager {
     private init(){}
     
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
-
+        
         let container = NSPersistentContainer(name: "TasksApp")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -27,9 +27,9 @@ class CoreDataManager {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -57,7 +57,7 @@ class CoreDataManager {
     func saveTask(title: String?, text: String?, images: Data?, creationDate: String?) {
         
         let task = Task(context: self.persistentContainer.viewContext)
-
+        
         task.images = images
         task.creationDate = creationDate
         task.text = text
@@ -68,19 +68,20 @@ class CoreDataManager {
     
     func coreDataObjectFromImages(images: [UIImage]) -> Data? {
         let dataArray = NSMutableArray()
-        
-        for img in images {
-            if let data = img.pngData() {
-                dataArray.add(data)
+        DispatchQueue.global(qos: .userInteractive).sync {
+            for img in images {
+                if let data = img.pngData() {
+                    dataArray.add(data)
+                }
             }
         }
         
         return try? NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: true)
     }
-
+    
     func imagesFromCoreData(taskImages: Data?) -> [UIImage]? {
         var retVal = [UIImage]()
-
+        
         guard let object = taskImages else { return nil }
         if let dataArray = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: object) {
             for data in dataArray {
@@ -93,7 +94,7 @@ class CoreDataManager {
         return retVal
     }
     //MARK: - Core Data delete data
-
+    
     func deleteTask(index: Int) {
         
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
@@ -104,6 +105,18 @@ class CoreDataManager {
         saveContext()
     }
     
+    func deleteAllTasks() {
+        
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        let tasks = (try? self.persistentContainer.viewContext.fetch(fetchRequest))
+        
+        for task in tasks ?? [] {
+            self.persistentContainer.viewContext.delete(task)
+            saveContext()
+        }
+        
+    }
+    
     //MARK: - Core Data edit data
     
     func editTask(index: Int, title: String?, text: String?, images: Data?, editDate: String?) {
@@ -111,13 +124,13 @@ class CoreDataManager {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
         let tasks = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
         
-
-        tasks[index].images = images
+        
         tasks[index].editDate = editDate
         tasks[index].text = text
         tasks[index].title = title
-        
+        tasks[index].images = images
         saveContext()
+        
     }
 }
 

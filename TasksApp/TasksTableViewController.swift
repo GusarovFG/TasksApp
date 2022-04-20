@@ -24,16 +24,41 @@ class TasksTableViewController: UITableViewController {
     }
     
     private func setupUI() {
-        let navigationItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(barButtonItemPressed))
-        self.navigationItem.rightBarButtonItem = navigationItem
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(barButtonItemPressed))
+        let deleteAllButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllTasks))
+        
+        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.rightBarButtonItems?.append(deleteAllButton)
         self.title = "Заметки"
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3450840844, green: 0.5538550592, blue: 0.5901235993, alpha: 1) 
         
         self.tableView.register(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
-    @objc func barButtonItemPressed() {
+    @objc private func barButtonItemPressed() {
         let deatilVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
         self.navigationController?.pushViewController(deatilVC, animated: true)
+    }
+    
+    @objc private func deleteAllTasks() {
+        deleteAllTasksButtonPressed()
+    }
+    
+    private func deleteAllTasksButtonPressed() {
+        
+        let actionSheet = UIAlertController(title: "Удаление всех заметок", message: "Вы действительно хотите удалить все заметки?", preferredStyle: .alert)
+        
+        let deleteButton = UIAlertAction(title: "Удалить", style: .default) { _ in
+            CoreDataManager.shared.deleteAllTasks()
+            self.tasks = CoreDataManager.shared.fetchTasks()
+            self.tableView.reloadData()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(deleteButton)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -46,7 +71,6 @@ class TasksTableViewController: UITableViewController {
         self.tasks.count
     }
 
-  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let task = self.tasks[indexPath.row]
@@ -65,16 +89,6 @@ class TasksTableViewController: UITableViewController {
         detailVC.indexOfTask = indexPath.row
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
-
-
-
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-
  
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -84,15 +98,5 @@ class TasksTableViewController: UITableViewController {
             CoreDataManager.shared.deleteTask(index: indexPath.row)
         }
     }
-
-    // MARK: - Navigation
-
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-
 
 }

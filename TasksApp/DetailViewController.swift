@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
@@ -18,7 +18,6 @@ class DetailViewController: UIViewController {
     var task: Task?
     var imagesFromTask: [UIImage] = []
     var indexOfTask = 0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,41 +35,50 @@ class DetailViewController: UIViewController {
             self.editDateLabel.text = self.task?.editDate
         }
     }
-
-
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    @objc func saveTask() {
+    @objc private func saveTask() {
         if self.task == nil {
+            
             CoreDataManager.shared.saveTask(title: self.titleTextField.text,
                                             text: self.textView.text,
                                             images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
                                             creationDate: DateManager.shared.getDate())
-            self.navigationController?.popViewController(animated: true)
         } else {
             CoreDataManager.shared.editTask(index: self.indexOfTask,
                                             title: self.titleTextField.text,
                                             text: self.textView.text,
                                             images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
                                             editDate: DateManager.shared.getDate())
-            
-            self.navigationController?.popViewController(animated: true)
         }
+        
+        self.navigationController?.popViewController(animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func addPhotoCellPressed() {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.chooseImagePicker(sourse: .camera)
+        }
+        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            self.chooseImagePicker(sourse: .photoLibrary)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photo)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
     }
-    */
-
+    
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -101,5 +109,39 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 80, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0,self.imagesFromTask.count] :
+            addPhotoCellPressed()
+        default:
+            let imageVC = ImageViewController()
+            imageVC.imageView.image = self.imagesFromTask[indexPath.row]
+            self.navigationController?.present(imageVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func chooseImagePicker(sourse: UIImagePickerController.SourceType){
+        
+        if UIImagePickerController.isSourceTypeAvailable(sourse) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = sourse
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            self.imagesFromTask.append(pickedImage)
+            self.imagesCollectionView.reloadData()
+        }
+        dismiss(animated: true, completion: nil)
+        
     }
 }
