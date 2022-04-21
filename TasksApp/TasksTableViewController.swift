@@ -13,6 +13,7 @@ class TasksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
     }
     
@@ -35,17 +36,7 @@ class TasksTableViewController: UITableViewController {
         self.tableView.register(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
-    @objc private func barButtonItemPressed() {
-        let deatilVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
-        self.navigationController?.pushViewController(deatilVC, animated: true)
-    }
-    
-    @objc private func deleteAllTasks() {
-        deleteAllTasksButtonPressed()
-    }
-    
     private func deleteAllTasksButtonPressed() {
-        
         let actionSheet = UIAlertController(title: "Удаление всех заметок", message: "Вы действительно хотите удалить все заметки?", preferredStyle: .alert)
         
         let deleteButton = UIAlertAction(title: "Удалить", style: .default) { _ in
@@ -59,6 +50,15 @@ class TasksTableViewController: UITableViewController {
         actionSheet.addAction(cancel)
         
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @objc private func barButtonItemPressed() {
+        let deatilVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        self.navigationController?.pushViewController(deatilVC, animated: true)
+    }
+    
+    @objc private func deleteAllTasks() {
+        deleteAllTasksButtonPressed()
     }
 
     // MARK: - Table view data source
@@ -98,5 +98,4 @@ class TasksTableViewController: UITableViewController {
             CoreDataManager.shared.deleteTask(index: indexPath.row)
         }
     }
-
 }

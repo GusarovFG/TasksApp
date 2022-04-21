@@ -18,11 +18,22 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var labelForCreateDate: UILabel!
     
     var task: Task?
-    var imagesFromTask: [UIImage] = []
     var indexOfTask = 0
+    private var imagesFromTask: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        self.view.endEditing(true)
+    }
+    
+    private func setupUI() {
         
         self.imagesCollectionView.delegate = self
         self.imagesCollectionView.dataSource = self
@@ -58,10 +69,23 @@ class DetailViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-
-        self.view.endEditing(true)
+    private func addPhotoCellPressed() {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Камера", style: .default) { _ in
+            self.chooseImagePicker(sourse: .camera)
+        }
+        let photo = UIAlertAction(title: "Галерея", style: .default) { _ in
+            self.chooseImagePicker(sourse: .photoLibrary)
+        }
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photo)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
     }
     
     @objc private func saveTask() {
@@ -81,25 +105,6 @@ class DetailViewController: UIViewController {
         }
         
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    private func addPhotoCellPressed() {
-        
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let camera = UIAlertAction(title: "Камера", style: .default) { _ in
-            self.chooseImagePicker(sourse: .camera)
-        }
-        let photo = UIAlertAction(title: "Галерея", style: .default) { _ in
-            self.chooseImagePicker(sourse: .photoLibrary)
-        }
-        let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(camera)
-        actionSheet.addAction(photo)
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true, completion: nil)
     }
     
     @IBAction func itileTiexfieldIsEmptyCheck(_ sender: UITextField) {
