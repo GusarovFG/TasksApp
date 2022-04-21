@@ -67,6 +67,7 @@ class CoreDataManager {
         saveContext()
     }
     
+    //MARK: - CoreData saving array of UIImages to CoreData
     func saveImages(images: [UIImage]) -> Data? {
         return coreDataObjectFromImages(images: images)
     }

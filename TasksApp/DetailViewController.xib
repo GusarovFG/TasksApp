@@ -13,6 +13,8 @@
                 <outlet property="creatingDateLabel" destination="RFY-4j-mWl" id="yvo-Dm-4hY"/>
                 <outlet property="editDateLabel" destination="mJA-Ns-0Lh" id="fvy-EO-cgM"/>
                 <outlet property="imagesCollectionView" destination="a6e-rs-Vmj" id="ZWK-Sh-f8O"/>
+                <outlet property="labelForCreateDate" destination="1cJ-4M-V0p" id="lEs-px-dY0"/>
+                <outlet property="labelForEditeDate" destination="m8e-Ja-wAR" id="jio-cV-X5u"/>
                 <outlet property="textView" destination="ius-7O-acX" id="sZd-K0-wOk"/>
                 <outlet property="titleTextField" destination="iVI-gS-eH4" id="f9Z-SX-ois"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -68,7 +70,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="a6e-rs-Vmj">
-                    <rect key="frame" x="10" y="754" width="394" height="100"/>
+                    <rect key="frame" x="10" y="705" width="394" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="y6y-aX-ibp"/>
                     </constraints>
@@ -83,28 +85,42 @@
                         <outlet property="delegate" destination="-1" id="KKk-fM-6CK"/>
                     </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата изменения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8e-Ja-wAR">
+                    <rect key="frame" x="10" y="812" width="131" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата создания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cJ-4M-V0p">
+                    <rect key="frame" x="286" y="812" width="118" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="a6e-rs-Vmj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="1xC-9F-hYM"/>
                 <constraint firstItem="RFY-4j-mWl" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="2dy-v7-dUJ"/>
-                <constraint firstItem="mJA-Ns-0Lh" firstAttribute="top" secondItem="a6e-rs-Vmj" secondAttribute="bottom" constant="8" symbolic="YES" id="35v-lT-dmU"/>
                 <constraint firstItem="ius-7O-acX" firstAttribute="top" secondItem="iVI-gS-eH4" secondAttribute="bottom" constant="10" id="7jG-br-Pvi"/>
                 <constraint firstItem="iVI-gS-eH4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="9HU-b0-Lcs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="m8e-Ja-wAR" secondAttribute="bottom" constant="29" id="A7I-4R-mbr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1cJ-4M-V0p" secondAttribute="trailing" constant="10" id="AC9-vV-vud"/>
                 <constraint firstItem="ius-7O-acX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="JXP-6M-2V1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a6e-rs-Vmj" secondAttribute="trailing" constant="10" id="Kgv-L7-0da"/>
                 <constraint firstItem="mJA-Ns-0Lh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Tbl-BK-ZD3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ius-7O-acX" secondAttribute="trailing" constant="10" id="UdP-ct-ecn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RFY-4j-mWl" secondAttribute="trailing" constant="20" id="XYw-Hg-vea"/>
-                <constraint firstItem="RFY-4j-mWl" firstAttribute="top" secondItem="a6e-rs-Vmj" secondAttribute="bottom" constant="8" symbolic="YES" id="Ysq-6u-yL8"/>
-                <constraint firstItem="RFY-4j-mWl" firstAttribute="top" secondItem="a6e-rs-Vmj" secondAttribute="bottom" constant="8" symbolic="YES" id="mld-bC-Wnn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1cJ-4M-V0p" secondAttribute="bottom" constant="29" id="b7Z-7k-lvG"/>
+                <constraint firstItem="m8e-Ja-wAR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="ewN-7b-HiT"/>
+                <constraint firstItem="m8e-Ja-wAR" firstAttribute="top" secondItem="a6e-rs-Vmj" secondAttribute="bottom" constant="7" id="iW3-1e-QU7"/>
                 <constraint firstItem="mJA-Ns-0Lh" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="nvv-Z3-fGJ"/>
                 <constraint firstItem="iVI-gS-eH4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="tEF-RM-xXb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iVI-gS-eH4" secondAttribute="trailing" constant="10" id="upW-C0-XPu"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
-            <point key="canvasLocation" x="134.78260869565219" y="104.46428571428571"/>
+            <point key="canvasLocation" x="142" y="77"/>
         </view>
     </objects>
     <resources>

@@ -14,6 +14,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var creatingDateLabel: UILabel!
     @IBOutlet weak var editDateLabel: UILabel!
+    @IBOutlet weak var labelForEditeDate: UILabel!
+    @IBOutlet weak var labelForCreateDate: UILabel!
     
     var task: Task?
     var imagesFromTask: [UIImage] = []
@@ -40,13 +42,26 @@ class DetailViewController: UIViewController {
                     self.titleTextField.text = self.task?.title
                     self.textView.text = self.task?.text
                     self.creatingDateLabel.text = self.task?.creationDate
-                    self.editDateLabel.text = self.task?.editDate
+                    if self.task?.editDate == nil {
+                        self.labelForEditeDate.isEnabled = false
+                    } else {
+                        self.editDateLabel.text = self.task?.editDate
+                    }
                     self.title = self.task?.title
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
                 }
             }
         } else {
             self.title = "Новая заметка"
+            self.labelForEditeDate.isHidden = true
+            self.labelForCreateDate.isHidden = true
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        self.view.endEditing(true)
     }
     
     @objc private func saveTask() {
@@ -90,6 +105,8 @@ class DetailViewController: UIViewController {
     @IBAction func itileTiexfieldIsEmptyCheck(_ sender: UITextField) {
         if !(sender.text?.isEmpty ?? true) {
             self.navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
 }
@@ -131,7 +148,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         default:
             let imageVC = ImageViewController()
             imageVC.imageView.image = self.imagesFromTask[indexPath.row]
-            self.navigationController?.present(imageVC, animated: true, completion: nil)
+            self.navigationController?.show(imageVC, sender: self)
         }
     }
 }
@@ -157,3 +174,5 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
         dismiss(animated: true, completion: nil)
     }
 }
+
+
