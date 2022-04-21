@@ -36,6 +36,9 @@
                             <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="itileTiexfieldIsEmptyCheck:" destination="-1" eventType="editingChanged" id="Uca-Aa-Sli"/>
+                    </connections>
                 </textField>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ius-7O-acX">
                     <rect key="frame" x="10" y="114" width="394" height="277"/>
@@ -65,9 +68,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="a6e-rs-Vmj">
-                    <rect key="frame" x="10" y="774" width="394" height="80"/>
+                    <rect key="frame" x="10" y="754" width="394" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="y6y-aX-ibp"/>
+                        <constraint firstAttribute="height" constant="100" id="y6y-aX-ibp"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Jx-WA-6X6">
                         <size key="itemSize" width="128" height="128"/>

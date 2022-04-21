@@ -54,27 +54,32 @@ class CoreDataManager {
     
     //MARK: - Core Data saving data
     
-    func saveTask(title: String?, text: String?, images: Data?, creationDate: String?) {
+    func saveTask(title: String?, text: String?, images: [UIImage], creationDate: String?) {
         
         let task = Task(context: self.persistentContainer.viewContext)
-        
-        task.images = images
         task.creationDate = creationDate
         task.text = text
         task.title = title
+        DispatchQueue.global(qos: .background).sync {
+            task.images = saveImages(images: images)
+        }
         
         saveContext()
     }
     
+    func saveImages(images: [UIImage]) -> Data? {
+        return coreDataObjectFromImages(images: images)
+    }
+    
     func coreDataObjectFromImages(images: [UIImage]) -> Data? {
         let dataArray = NSMutableArray()
-        DispatchQueue.global(qos: .userInteractive).sync {
+        
             for img in images {
-                if let data = img.pngData() {
+                if let data = img.jpegData(compressionQuality: 0.3) {
                     dataArray.add(data)
                 }
             }
-        }
+        
         
         return try? NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: true)
     }

@@ -10,7 +10,7 @@ import UIKit
 class ImageViewController: UIViewController {
     
     var imageView = UIImageView()
-    var button = UIButton(type: .system)
+    private var button = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class ImageViewController: UIViewController {
         }
     }
     
-    @objc func closeController() {
+    @objc private func closeController() {
         self.navigationController?.popViewController(animated: true)
     }
 }

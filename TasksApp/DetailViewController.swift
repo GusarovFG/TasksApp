@@ -21,40 +21,48 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.imagesCollectionView.delegate = self
         self.imagesCollectionView.dataSource = self
         self.imagesCollectionView.register(UINib(nibName: "CastomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collCell")
+        self.imagesCollectionView.backgroundColor? = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        
         let barButtonItem = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(saveTask))
         self.navigationItem.rightBarButtonItem = barButtonItem
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         if task != nil {
-            self.titleTextField.text = self.task?.title
-            self.textView.text = self.task?.text
-            self.imagesFromTask = CoreDataManager.shared.imagesFromCoreData(taskImages: task?.images) ?? []
-            self.creatingDateLabel.text = self.task?.creationDate
-            self.editDateLabel.text = self.task?.editDate
+            let queue = DispatchQueue.global(qos: .utility)
+            queue.async {
+                self.imagesFromTask = CoreDataManager.shared.imagesFromCoreData(taskImages: self.task?.images) ?? []
+                DispatchQueue.main.async {
+                    self.imagesCollectionView.reloadData()
+                    self.titleTextField.text = self.task?.title
+                    self.textView.text = self.task?.text
+                    self.creatingDateLabel.text = self.task?.creationDate
+                    self.editDateLabel.text = self.task?.editDate
+                    self.title = self.task?.title
+                }
+            }
+        } else {
+            self.title = "Новая заметка"
         }
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     @objc private func saveTask() {
         if self.task == nil {
-            
             CoreDataManager.shared.saveTask(title: self.titleTextField.text,
                                             text: self.textView.text,
-                                            images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
+                                            images: self.imagesFromTask,
                                             creationDate: DateManager.shared.getDate())
+            
         } else {
             CoreDataManager.shared.editTask(index: self.indexOfTask,
                                             title: self.titleTextField.text,
                                             text: self.textView.text,
                                             images: CoreDataManager.shared.coreDataObjectFromImages(images: self.imagesFromTask),
                                             editDate: DateManager.shared.getDate())
+            
         }
         
         self.navigationController?.popViewController(animated: true)
@@ -64,13 +72,13 @@ class DetailViewController: UIViewController {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+        let camera = UIAlertAction(title: "Камера", style: .default) { _ in
             self.chooseImagePicker(sourse: .camera)
         }
-        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+        let photo = UIAlertAction(title: "Галерея", style: .default) { _ in
             self.chooseImagePicker(sourse: .photoLibrary)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         
         actionSheet.addAction(camera)
         actionSheet.addAction(photo)
@@ -79,6 +87,11 @@ class DetailViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func itileTiexfieldIsEmptyCheck(_ sender: UITextField) {
+        if !(sender.text?.isEmpty ?? true) {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -93,13 +106,13 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collCell", for: indexPath) as! CastomCollectionViewCell
         if self.imagesFromTask.isEmpty {
-            cell.setupCell(image: UIImage(systemName: "camera.fill")!)
+            cell.setupCell(image: UIImage(systemName: "camera")!)
         } else {
             switch indexPath{
             case [0,0]..<[0,self.imagesFromTask.count]:
                 cell.setupCell(image: self.imagesFromTask[indexPath.row])
             case [0,self.imagesFromTask.count]:
-                cell.setupCell(image: UIImage(systemName: "camera.fill")!)
+                cell.setupCell(image: UIImage(systemName: "camera")!)
             default:
                 break
             }
@@ -142,6 +155,5 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
             self.imagesCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }

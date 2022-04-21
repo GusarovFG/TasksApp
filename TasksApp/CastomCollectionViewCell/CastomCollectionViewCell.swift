@@ -13,6 +13,7 @@ class CastomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     func setupCell(image: UIImage) {
+        self.imageView.contentMode = .center
         self.imageView.image = image
     }
 }
