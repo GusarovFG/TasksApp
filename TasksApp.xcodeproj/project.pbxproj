@@ -98,15 +98,10 @@
 			children = (
 				FB8DC4F1280EC8C300E0FE78 /* AppDelegate.swift */,
 				FB8DC4F3280EC8C300E0FE78 /* SceneDelegate.swift */,
-				FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */,
-				FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */,
-				FBA23BF42810174700F1B6E3 /* DetailViewController.swift */,
-				FBA23BF8281052CD00F1B6E3 /* ImageViewController.swift */,
-				FBA23BF52810174700F1B6E3 /* DetailViewController.xib */,
-				FB8DC50C280ED3C300E0FE78 /* DateManager.swift */,
+				FBD7B0C02812927F00A1BDDC /* Controllers */,
+				FBD7B0C2281292C500A1BDDC /* Managers */,
+				FB8DC515280EED7300E0FE78 /* CastomViews */,
 				FB8DC4FD280EC8C700E0FE78 /* Assets.xcassets */,
-				FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */,
-				FB8DC515280EED7300E0FE78 /* CastomCollectionViewCell */,
 				FB8DC4FF280EC8C700E0FE78 /* LaunchScreen.storyboard */,
 				FB8DC502280EC8C700E0FE78 /* Info.plist */,
 				FB8DC4FA280EC8C300E0FE78 /* TasksApp.xcdatamodeld */,
@@ -114,13 +109,42 @@
 			path = TasksApp;
 			sourceTree = "<group>";
 		};
-		FB8DC515280EED7300E0FE78 /* CastomCollectionViewCell */ = {
+		FB8DC515280EED7300E0FE78 /* CastomViews */ = {
 			isa = PBXGroup;
 			children = (
+				FB8DC50E280ED97F00E0FE78 /* CustomCell.xib */,
 				FB8DC512280EDFE800E0FE78 /* CastomCollectionViewCell.xib */,
 				FB8DC516280EED9900E0FE78 /* CastomCollectionViewCell.swift */,
 			);
-			path = CastomCollectionViewCell;
+			path = CastomViews;
+			sourceTree = "<group>";
+		};
+		FBD7B0C02812927F00A1BDDC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB8DC508280ECB7B00E0FE78 /* TasksTableViewController.swift */,
+				FBA23BF8281052CD00F1B6E3 /* ImageViewController.swift */,
+				FBD7B0C12812929700A1BDDC /* DetailViewController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FBD7B0C12812929700A1BDDC /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBA23BF42810174700F1B6E3 /* DetailViewController.swift */,
+				FBA23BF52810174700F1B6E3 /* DetailViewController.xib */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		FBD7B0C2281292C500A1BDDC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FB8DC50A280ED13D00E0FE78 /* CoreDataManager.swift */,
+				FB8DC50C280ED3C300E0FE78 /* DateManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
